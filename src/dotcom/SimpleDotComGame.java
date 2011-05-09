@@ -4,20 +4,40 @@ public class SimpleDotComGame {
 
 	public static void main(String[] args) {
 		
-		//	Instantiate a SimpleDotCom object
-		SimpleDotCom dot = new SimpleDotCom();
+		//	Variable to track how many guesses the user makes
+		int numOfGuesses = 0;
 		
-		//	Array for the location of the dot com
-		int[] arrLocations = { 2, 3, 4 };
+		//	Class that contains methods for getting user input
+		GameHelper helper = new GameHelper();
 		
-		//	Set the new locations for the dot com
-		dot.SetLocationCells(arrLocations);
+		//	Create instance of the game
+		SimpleDotCom theDotCom = new SimpleDotCom();
 		
-		//	Make a fake user guess
-		String szUserGuess = "2";
+		//	Choose a random number for the first cell and use it to help create the cell location array
+		int nRandomNum = (int) (Math.random() * 5);
+		int[] anLocations = {nRandomNum, nRandomNum + 1, nRandomNum + 2};
 		
-		//	Invoke the check method and pass it the fake guess
-		String szResult = dot.CheckYourself(szUserGuess);
+		theDotCom.SetLocationCells(anLocations);
+		
+		//	Check to see if the game is still alive
+		boolean bIsAlive = true;
+		while(bIsAlive)
+		{
+			//	Get the user input using the class we have created earlier
+			String szGuess = helper.getUserInput("enter a number");
+			
+			//	Check the actual guess
+			String szResult = theDotCom.CheckYourself(szGuess);
+			
+			numOfGuesses++;
+			
+			//	If the result was a kill, end the game and print out the results
+			if(szResult.equals("kill"))
+			{
+				bIsAlive = false;
+				System.out.println("You took " + numOfGuesses + " guesses");
+			}
+		}
 
 	}
 
