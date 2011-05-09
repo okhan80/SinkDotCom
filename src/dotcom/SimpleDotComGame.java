@@ -24,7 +24,7 @@ public class SimpleDotComGame {
 		while(bIsAlive)
 		{
 			//	Get the user input using the class we have created earlier
-			String szGuess = helper.getUserInput("enter a number");
+			String szGuess = helper.GetUserInput("enter a number");
 			
 			//	Check the actual guess
 			String szResult = theDotCom.CheckYourself(szGuess);
